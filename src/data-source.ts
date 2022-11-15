@@ -1,11 +1,11 @@
-import { DataSource } from 'typeorm';
+import {DataSource} from 'typeorm';
 import "dotenv/config";
 
 const AppDataSource = process.env.NODE_ENV === 'test' ?
     new DataSource({
         type: "sqlite",
         database: ":memory:",
-        entities: ["src/entities/*ts"],
+        entities: ["src/entities/*.ts"],
         synchronize: true
     }) 
     :
@@ -18,8 +18,8 @@ const AppDataSource = process.env.NODE_ENV === 'test' ?
         database: process.env.DB,
         synchronize: false,
         logging: false,
-        entities: ["src/entities/*ts"],
-        migrations: ["src/migrations/*ts"],
+        entities: ["src/entities/*.ts"],
+        migrations: ["src/migrations/*.ts"],
     });
 
 export default AppDataSource;
