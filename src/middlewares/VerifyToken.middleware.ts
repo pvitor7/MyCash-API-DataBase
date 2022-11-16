@@ -2,8 +2,12 @@ import "dotenv/config"
 import { Request, NextFunction, Response } from 'express';
 import jwt from "jsonwebtoken";
 
-export const AuthUserToken = (req: Request, res: Response, next: NextFunction) => {
+export const VerifyToken = (req: Request, res: Response, next: NextFunction) => {
+
   const token = req.headers.authorization;
+
+  console.log("chegou aqui")
+  console.log(req.headers.authorization)
 
   if (!token) {
     return res.status(401).json({ message: "Invalid token" });

@@ -4,6 +4,9 @@ export interface ITransaciton{
     value: number;
 }
 
-export interface IRequestTransaciton extends ITransaciton{
-    userId?: string;
+export interface IRequestTransaciton{
+    userId: string;
+    debiteAccountId: string;
+    creditAccountId: string;
+    value: number;
 }

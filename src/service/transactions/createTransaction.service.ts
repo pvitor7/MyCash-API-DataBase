@@ -8,28 +8,30 @@ const createTransactionService = async ({userId, debiteAccountId, creditAccountI
     
     const accountRepository = AppDataSource.getRepository(Accounts);
     
-    const accountDebitExists = await accountRepository.findOneBy({debiteAccountId});
+    const accountDebitExists = await accountRepository.findOne({where: {id: debiteAccountId}});
 
-    if(accountDebitExists){
+    if(!accountDebitExists){
         return "A conta para débito não existe";
     }
 
-    if(accountDebitExists.value <= value){
+    if(accountDebitExists.balance <= value){
         return "Você não possui saldo suficiente para esta operação";
     }
-
     
-    const accountCreditExists = await accountRepository.findOneBy(debiteAccountId);
+    const accountCreditExists = await accountRepository.findOne({where: {id: creditAccountId}});
     
-    if(accountCreditExists){
+    if(!accountCreditExists){
         return "A conta para crédito não existe";
     }
     
-    await accountRepository.update(accountDebitExists.id, {value: accountDebitExists.value - value});
+    await accountRepository.update(debiteAccountId, {balance: Number(accountDebitExists.balance) - value});
     
-    await accountRepository.update(accountCreditExists.id, {value: accountCreditExists.value - value});
+    await accountRepository.update(creditAccountId, {balance: Number(accountCreditExists.balance) + value});
     
-    
+    console.log(value, accountDebitExists, accountCreditExists);
+    console.log(Number(accountCreditExists.balance) + value) 
+    console.log(Number(accountDebitExists.balance) - value)
+        
     const transactionRepository = AppDataSource.getRepository(Transactions);
 
     const newTransaction = new Transactions();
