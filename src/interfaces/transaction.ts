@@ -1,12 +1,14 @@
+import { Accounts } from '../entities/accounts';
+
 export interface ITransaciton{
-    debiteAccountId: string;
-    creditAccountId: string;
+    debitedAccountId: string;
+    creditedAccountId: string;
     value: number;
 }
 
 export interface IRequestTransaciton{
     userId: string;
-    debiteAccountId: string;
-    creditAccountId: string;
+    debitedAccountId: string;
+    creditedAccountId: string;
     value: number;
 }

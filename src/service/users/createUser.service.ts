@@ -2,6 +2,7 @@ import { IUser } from '../../interfaces/user';
 import { User } from '../../entities/users';
 import AppDataSource from '../../data-source';
 import { hash } from 'bcryptjs';
+import { Accounts } from '../../entities/accounts';
 
 const createUserService = async ({username, password}: IUser) => {
     
@@ -14,11 +15,18 @@ const createUserService = async ({username, password}: IUser) => {
         return "O usuário já existe"
     }
 
-    const hashedPassword = await hash(password, 12);
+    const accountRepository = AppDataSource.getRepository(Accounts);
+    const account = new Accounts();
+    account.balance = 100;
+    accountRepository.create(account);
+    await accountRepository.save(account);
 
+    const hashedPassword = await hash(password, 12);
+    
     const user = new User();
     user.username = username;
     user.password = hashedPassword;
+    user.account = account;
 
     userRepository.create(user);
     await userRepository.save(user);

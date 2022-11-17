@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Accounts } from "./accounts"
 
 @Entity("Users")
 @Unique(['username'])
@@ -12,6 +13,12 @@ export class User{
 
     @Column()
     password: string;
+
+    @OneToOne(() => Accounts, (account: Accounts) => Accounts, {
+        eager: true
+    })
+    @JoinColumn()
+    account: Accounts;
 
     constructor(){
         if(!this.id){

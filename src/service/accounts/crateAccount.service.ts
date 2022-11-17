@@ -12,7 +12,6 @@ const createAccountService = async () => {
     await accountRepository.save(account);
 
     return account;
-
 } 
 
 export default createAccountService;
