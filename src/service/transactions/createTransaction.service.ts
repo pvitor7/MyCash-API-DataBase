@@ -5,6 +5,10 @@ import { IRequestTransaciton } from '../../interfaces/transaction';
 
 
 const createTransactionService = async ({userId, debiteAccountId, creditAccountId, value}: IRequestTransaciton) => {
+
+    const integerValue = value.toString().substring(0, (value.toString().length-2));
+    const centsValue = value.toString().substring((value.toString().length-2));
+    const valueTransaciton = Number(integerValue + "." + centsValue);
     
     const accountRepository = AppDataSource.getRepository(Accounts);
     
@@ -14,7 +18,7 @@ const createTransactionService = async ({userId, debiteAccountId, creditAccountI
         return "A conta para débito não existe";
     }
 
-    if(accountDebitExists.balance <= value){
+    if(accountDebitExists.balance <= valueTransaciton){
         return "Você não possui saldo suficiente para esta operação";
     }
     
@@ -24,20 +28,16 @@ const createTransactionService = async ({userId, debiteAccountId, creditAccountI
         return "A conta para crédito não existe";
     }
     
-    await accountRepository.update(debiteAccountId, {balance: Number(accountDebitExists.balance) - value});
+    await accountRepository.update(debiteAccountId, {balance: Number(accountDebitExists.balance) - valueTransaciton});
     
-    await accountRepository.update(creditAccountId, {balance: Number(accountCreditExists.balance) + value});
+    await accountRepository.update(creditAccountId, {balance: Number(accountCreditExists.balance) + valueTransaciton});
     
-    console.log(value, accountDebitExists, accountCreditExists);
-    console.log(Number(accountCreditExists.balance) + value) 
-    console.log(Number(accountDebitExists.balance) - value)
-        
     const transactionRepository = AppDataSource.getRepository(Transactions);
 
     const newTransaction = new Transactions();
     newTransaction.debiteAccountId = accountDebitExists.id;
     newTransaction.creditAccountId = accountDebitExists.id;
-    newTransaction.value = value;
+    newTransaction.value = valueTransaciton;
     newTransaction.createdAt = new Date();
     
     transactionRepository.create(newTransaction);
