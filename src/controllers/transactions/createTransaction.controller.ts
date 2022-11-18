@@ -6,9 +6,9 @@ const createTransactionController = async (req: Request, res: Response) => {
     
     const userId = req.user.id;
 
-    const {debitedAccountId, creditedAccountId, value} = req.body;
+    const {usernameAddressee, value} = req.body;
 
-    const newTransaction = await createTransactionService({userId, debitedAccountId, creditedAccountId, value});
+    const newTransaction = await createTransactionService({userId, usernameAddressee, value});
 
     return res.status(200).json(newTransaction);
 };

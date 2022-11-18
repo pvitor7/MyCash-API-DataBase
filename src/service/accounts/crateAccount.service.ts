@@ -1,7 +1,7 @@
 import { Accounts } from '../../entities/accounts';
 import AppDataSource from '../../data-source';
 
-const createAccountService = async () => {
+const createAccountService = async (userId: string) => {
 
     const accountRepository = AppDataSource.getRepository(Accounts);
 

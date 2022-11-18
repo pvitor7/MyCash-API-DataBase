@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 const createAccountController = async (req: Request, res: Response) => {
 
-    // const { userId } = req.user.id;
+    const { id } = req.user;
 
     const newAccount = await createAccountService();
 

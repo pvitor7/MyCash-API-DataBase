@@ -8,7 +8,6 @@ export interface ITransaciton{
 
 export interface IRequestTransaciton{
     userId: string;
-    debitedAccountId: string;
-    creditedAccountId: string;
+    usernameAddressee: string;
     value: number;
 }
