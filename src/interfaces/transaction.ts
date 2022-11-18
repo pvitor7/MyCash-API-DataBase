@@ -11,3 +11,16 @@ export interface IRequestTransaciton{
     usernameAddressee: string;
     value: number;
 }
+
+interface IDateFilter{
+    
+}
+
+
+export interface ITransacitonFilterRequest{
+    userId: string;
+    type?: string;
+    day?: number;
+    month?: number;
+    age?: number;
+}
