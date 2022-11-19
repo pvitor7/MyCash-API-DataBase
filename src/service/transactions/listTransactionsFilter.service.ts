@@ -37,33 +37,12 @@ const listTransactionsFilterService = async ({
     );
   }
 
-  if (type == "debited") {
-    return listTransactions.map((transaction) => {
-      if (transaction.debitedAccountId.id === userAccount.account.id) {
-        return {
-          id: transaction.id,
-          value: transaction.value,
-          date: transaction.createdAt,
-          debitedAccount: transaction.debitedAccountId.id,
-          creditedAccount: transaction.creditedAccountId.id,
-        };
-      }
-    });
+  if (type == "cash-out") {
+    return listTransactions.filter((transaction) => transaction.debitedAccountId.id === userAccount.account.id)
   }
 
-  if (type == "credited") {
-    return listTransactions.filter((transaction) => {
-      console.log(transaction)
-      if (transaction.creditedAccountId.id === userAccount.account.id)
-        return {
-          id: transaction.id,
-          value: transaction.value,
-          date: transaction.createdAt,
-          debitedAccount: transaction.debitedAccountId.id,
-          creditedAccount: transaction.creditedAccountId.id,
-        };
-    });
-  }
+  if (type == "cash-in") {return listTransactions.filter((transaction) => transaction.creditedAccountId.id === userAccount.account.id)}
+    
 };
 
 export default listTransactionsFilterService;

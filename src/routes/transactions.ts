@@ -11,5 +11,6 @@ const transactionRoute = Router();
 transactionRoute.post("", VerifyToken, schemaValidation(transactionSchema), createTransactionController);
 transactionRoute.get("/", VerifyToken, listTransactionsController);
 transactionRoute.post("/category", VerifyToken, listTransactionsFilterController);
+transactionRoute.get("/category/:type?", VerifyToken, listTransactionsFilterController);
 
 export default transactionRoute;
