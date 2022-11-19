@@ -1,3 +1,4 @@
+import { AppError } from './../../errors/AppError';
 import { IUser } from '../../interfaces/user';
 import { compare } from "bcryptjs"
 import jwt from "jsonwebtoken";
@@ -12,13 +13,13 @@ const LoginUserService = async ({username, password}: IUser) => {
     const usernameExists = users.find(user => user.username === username);
 
     if (!usernameExists){
-        return "Usuário ou senha incorretos"
+        throw new AppError("Usuário ou senha incorretos.", 400);
     }
 
     const passwordVerify = await compare(password, usernameExists.password);
 
     if (!passwordVerify){
-        return "Usuário ou senha incorretos"
+        throw new AppError("Usuário ou senha incorretos.", 400)
     }
 
     const token = jwt.sign({

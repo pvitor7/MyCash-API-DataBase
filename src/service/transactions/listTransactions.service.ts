@@ -1,3 +1,4 @@
+import { AppError } from './../../errors/AppError';
 import AppDataSource from "../../data-source";
 import { Transactions } from "../../entities/transactions";
 import { User } from "../../entities/users";
@@ -12,7 +13,7 @@ const listTransactionsService = async (userId: string) => {
   });
 
   if (!userAccount) {
-    return "O úsuário não foi encontrado!";
+    throw new AppError("Usuário não encontrado!", 404)
   }
 
   const transactionRepository = AppDataSource.getRepository(Transactions);
@@ -24,7 +25,7 @@ const listTransactionsService = async (userId: string) => {
   });
 
   if (listTransactions.length === 0) {
-    return "Esta conta ainda não envio nem recebeu transfências.";
+    throw new AppError("Esta conta ainda não envio nem recebeu transfências.", 404);
   }
 
   return listTransactions;

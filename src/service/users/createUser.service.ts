@@ -1,3 +1,4 @@
+import { AppError } from './../../errors/AppError';
 import { IUser } from '../../interfaces/user';
 import { User } from '../../entities/users';
 import AppDataSource from '../../data-source';
@@ -12,7 +13,7 @@ const createUserService = async ({username, password}: IUser) => {
     const usernameAlreadyExists = users.find(user => user.username === username);
 
     if (usernameAlreadyExists){
-        return "O usuário já existe"
+        throw new AppError("O usuário já existe.", 400)
     }
 
     const accountRepository = AppDataSource.getRepository(Accounts);

@@ -1,3 +1,4 @@
+import { AppError } from './../../errors/AppError';
 import { ITransacitonFilterRequest } from "./../../interfaces/transaction";
 import AppDataSource from "../../data-source";
 import { Transactions } from "../../entities/transactions";
@@ -12,17 +13,12 @@ const listTransactionsFilterService = async ({
   age,
   type,
 }: ITransacitonFilterRequest) => {
-  if (!type) {
-    if (!day || !month || !age) {
-      return "É necessário informar um tipo, ou data de transações para o filtro!";
-    }
-  }
-
+  
   const userRepository = AppDataSource.getRepository(User);
   const userAccount = await userRepository.findOne({ where: { id: userId } });
 
   if (!userAccount) {
-    return "O úsuário não foi encontrado!";
+    throw new AppError("Usuário não encontrado!", 404)
   }
 
   const transactionRepository = AppDataSource.getRepository(Transactions);

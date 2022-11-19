@@ -7,7 +7,7 @@ const retriveAccountController = async (req: Request, res: Response) => {
 
     const newAccount = await retriveAccountService(id);
 
-    return res.status(201).json(newAccount);
+    return res.status(200).json(newAccount);
 
 };
 
