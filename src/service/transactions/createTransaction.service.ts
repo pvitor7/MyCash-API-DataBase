@@ -7,7 +7,7 @@ import { User } from '../../entities/users';
 import { IRequestTransaciton } from '../../interfaces/transaction';
 
 
-const createTransactionService = async ({userId, usernameAddressee, value}: IRequestTransaciton): Promise<IResponseTransaction> => {
+const createTransactionService = async ({userId, usernameAddressee, value}: IRequestTransaciton) => {
 
     const integerValue = value.toString().substring(0, (value.toString().length-2));
     const centsValue = value.toString().substring((value.toString().length-2));

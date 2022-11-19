@@ -14,7 +14,7 @@ export interface IRequestTransaciton{
 
 export interface IResponseTransaction{
     transferId: number;
-    createdAt?: string;
+    createdAt: string;
     value: string;
     debitedUser: string;
     creditedUser: string;
