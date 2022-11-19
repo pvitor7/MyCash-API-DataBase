@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import AppDataSource from '../../data-source';
 import { User } from '../../entities/users';
 
-const LoginUserService = async ({username, password}: IUser) => {
+const LoginUserService = async ({username, password}: IUser): Promise<string> => {
 
     const userRepository = AppDataSource.getRepository(User);
     const users = await userRepository.find();

@@ -1,3 +1,4 @@
+import { IUserCreateResponse } from './../../interfaces/user';
 import { AppError } from './../../errors/AppError';
 import { IUser } from '../../interfaces/user';
 import { User } from '../../entities/users';
@@ -5,7 +6,7 @@ import AppDataSource from '../../data-source';
 import { hash } from 'bcryptjs';
 import { Accounts } from '../../entities/accounts';
 
-const createUserService = async ({username, password}: IUser) => {
+const createUserService = async ({username, password}: IUser): Promise<IUserCreateResponse> => {
     
     const userRepository = AppDataSource.getRepository(User);
     const users = await userRepository.find();

@@ -1,3 +1,4 @@
+import { IResponseTransaction } from './../../interfaces/transaction';
 import { AppError } from './../../errors/AppError';
 import AppDataSource from '../../data-source';
 import { Transactions } from '../../entities/transactions';
@@ -6,7 +7,7 @@ import { User } from '../../entities/users';
 import { IRequestTransaciton } from '../../interfaces/transaction';
 
 
-const createTransactionService = async ({userId, usernameAddressee, value}: IRequestTransaciton) => {
+const createTransactionService = async ({userId, usernameAddressee, value}: IRequestTransaciton): Promise<IResponseTransaction> => {
 
     const integerValue = value.toString().substring(0, (value.toString().length-2));
     const centsValue = value.toString().substring((value.toString().length-2));
@@ -55,7 +56,7 @@ const createTransactionService = async ({userId, usernameAddressee, value}: IReq
     transactionRepository.create(newTransaction);
     await transactionRepository.save(newTransaction);
     
-    return {transferId: newTransaction.id, createdAt: newTransaction.createdAt, value: newTransaction.value, debitedAccount: newTransaction.debitedAccountId.id, creditedAccount: newTransaction.creditedAccountId.id};
+    return {transferId: newTransaction.id, createdAt: newTransaction.createdAt.toString(), value: newTransaction.value, debitedUser: user.username, creditedUser: usernameAddressee};
 };
 
 export default createTransactionService;

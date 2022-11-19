@@ -12,10 +12,13 @@ export interface IRequestTransaciton{
     value: number;
 }
 
-interface IDateFilter{
-    
+export interface IResponseTransaction{
+    transferId: number;
+    createdAt?: string;
+    value: string;
+    debitedUser: string;
+    creditedUser: string;
 }
-
 
 export interface ITransacitonFilterRequest{
     userId: string;

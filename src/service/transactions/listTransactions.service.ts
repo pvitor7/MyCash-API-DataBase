@@ -1,3 +1,4 @@
+import { IResponseTransaction } from './../../interfaces/transaction';
 import { AppError } from './../../errors/AppError';
 import AppDataSource from "../../data-source";
 import { Transactions } from "../../entities/transactions";
