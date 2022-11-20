@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: api
+    build: .
+    ports:
+      - 3001:3000
+    environment:
+      - PORT=3000
+      - DB_USER=paulovitor
+      - DB_HOST=db
+      - DB=MyCash
+      - DB_PASSWORD=1234
+      - DB_PORT=5432
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+  db:
+    container_name: db
+    image: postgres:14.3
+    ports: 
+      - 5431:5432
+    environment:
+      - POSTGRES_USER=paulovitor
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=MyCash
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paulovitor -d MyCash"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - postgres_MyCash:/var/lib/postgresql/data
+volumes:
+  postgres_MyCash: 
+    driver: local
