@@ -13,13 +13,3 @@ RUN yarn
 COPY . .
 
 CMD ["yarn", "dev"]
-
-# RUN yarn typeorm migration:create src/migrations/initialMigration
-
-# RUN yarn typeorm migration:generate src/migrations/initialMigration -d src/data-source.ts
-
-# RUN yarn typeorm migration:run -d src/data-source.ts
-
-
-
-
