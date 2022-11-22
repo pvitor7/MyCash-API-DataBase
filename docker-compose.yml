@@ -5,25 +5,25 @@ services:
     container_name: api
     build: .
     ports:
-      - 3001:3000
+      - 3000:3000
     environment:
-      - PORT=3000
-      - DB_USER=paulovitor
       - DB_HOST=db
-      - DB=MyCash
       - DB_PASSWORD=1234
-      - DB_PORT=5432
+      - DB=MyCash
+      - DB_USER=paulovitor
+      - SECRET_KEY=cash
+    
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - .:/app
-
+    
   db:
     container_name: db
-    image: postgres:14.3
+    image: postgres:14
     ports: 
-      - 5431:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=paulovitor
       - POSTGRES_PASSWORD=1234
@@ -35,10 +35,9 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
-    
     volumes:
-      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - postgres_MyCash:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
+
 volumes:
-  postgres_MyCash: 
+  postgres: 
     driver: local
