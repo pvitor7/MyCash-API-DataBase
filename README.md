@@ -29,19 +29,32 @@ A API possui 7 Eendpoints, sendo os principais de criação de usuário, transfe
   Instruções para instalação da aplicação&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </h3>
 
-Para a instalação das dependencias do projeto, o usuário deve acessar a pasta raiz, e no terminal utilizar o comando de execução do gerenciador de dependências utilizado. 
+Para a instalação das dependencias do projeto, o usuário deve acessar a pasta raiz, e no terminal utilizar o comando de execução dos gerenciador de dependências utilizado. 
 
-YARN: - yarn install
+YARN: - yarn install <br/>
 NPM: - npm install
 
-Após a instalação das dependencias é necessário rodar as migrations, comandos que geram as tabelas necessárias no banco de dados.
+Após as instalações, é necessário criar os containers, utilizando o seguinte comando:
+
+- docker-compose up
+
+O próximo passo é rodar as migrations, comandos que geram as tabelas necessárias no banco de dados.
+Essas migrations devem ser executadas dentro do container, e para acessálo siga alguns passos. 
+
+Abra outro terminal e execute este comando para ver os números de identificação dos containers.
+- docker ps -a
+
+Utilize o CONTAINER ID da imagem "mycash-api-database_api" que aparecerá no terminal -> (SUPONHA que é 00000000000) <-
+
+Abra um terminal dentro do container com o comando:
+
+- docker exec -it 00000000000 /bin/bash
+
+Agora dentro do container execute os seguintes comandos para criar as tabelas (Comandos para o gerenciador YARN):
 
 - yarn typeorm migration:create src/migrations/initialMigration
 - yarn typeorm migration:generate src/migrations/initialMigration -d src/data-source.ts
 - yarn typeorm migration:run -d src/data-source.ts
-
-
-
 
 <br />
 <br />
