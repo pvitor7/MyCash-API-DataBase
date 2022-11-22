@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: api
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=db
+      - DB_PASSWORD=1234
+      - DB=MyCash
+      - DB_USER=paulovitor
+      - SECRET_KEY=cash
+    
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    
+  db:
+    container_name: db
+    image: postgres:14
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=paulovitor
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=MyCash
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paulovitor -d MyCash"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres: 
+    driver: local
