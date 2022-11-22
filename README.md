@@ -19,9 +19,6 @@ O projeto faz a criação do banco de dados com as tabelas necessárias. E a cri
 
 A API possui 7 Eendpoints, sendo os principais de criação de usuário, transferência e leitura de seus históricos.
 
-
-<br />
-<br />
 <br />
 <br />
 
@@ -56,8 +53,7 @@ Agora dentro do container execute os seguintes comandos para criar as tabelas (C
 - yarn typeorm migration:generate src/migrations/initialMigration -d src/data-source.ts
 - yarn typeorm migration:run -d src/data-source.ts
 
-<br />
-<br />
+
 <br />
 <br />
 
