@@ -53,6 +53,12 @@ Agora dentro do container execute os seguintes comandos para criar as tabelas (C
 - yarn typeorm migration:generate src/migrations/initialMigration -d src/data-source.ts
 - yarn typeorm migration:run -d src/data-source.ts
 
+<br />
+
+A api também possui testes, que podem ser rodados com o comando:
+
+- yarn test
+
 
 <br />
 <br />
@@ -62,7 +68,7 @@ Agora dentro do container execute os seguintes comandos para criar as tabelas (C
 ## Rotas do Usuário
 
 ```json
-[{ "baseurl": "https://" }]
+[{ "baseurl": "https://localhost:3000" }]
 ```
 
 <h2 align ='center'> Criando um Usuário </h2>
