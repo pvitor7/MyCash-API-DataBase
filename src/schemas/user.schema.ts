@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 const userSchema: any = yup.object().shape({ 
-    username: yup.string().min(3, "Mínimo de 3 caracteres").required("Campo obrigatório"),
+    username: yup.string().min(3, "O nome de usuário deve ter no mínimo 3 caracteres").required("Campo obrigatório"),
     password: yup.string()
     .required("Campo obrigatório")
     .matches(
