@@ -29,7 +29,6 @@ A API possui 7 Eendpoints, sendo os principais de criação de usuário, transfe
 Para a instalação das dependencias do projeto, o usuário deve acessar a pasta raiz, e no terminal utilizar o comando de execução dos gerenciador de dependências utilizado. 
 
 YARN: - yarn install <br/>
-NPM: - npm install
 
 Após as instalações, é necessário criar os containers, utilizando o seguinte comando:
 
