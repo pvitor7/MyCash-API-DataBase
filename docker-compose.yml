@@ -2,15 +2,15 @@ version: '3.9'
 
 services:
   api:
-    container_name: api
+    container_name: api_mycash
     build: .
     ports:
       - 3000:3000
     environment:
-      - DB_HOST=db
+      - DB_HOST=db_mycash
       - DB_PASSWORD=1234
       - DB=MyCash
-      - DB_USER=paulovitor
+      - DB_USER=user
       - SECRET_KEY=cash
     
     depends_on:
@@ -20,17 +20,17 @@ services:
       - .:/app
     
   db:
-    container_name: db
+    container_name: db_mycash
     image: postgres:14
     ports: 
-      - 5432:5432
+      - 5431:5432
     environment:
-      - POSTGRES_USER=paulovitor
+      - POSTGRES_USER=user
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=MyCash
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U paulovitor -d MyCash"]
+      test: ["CMD-SHELL", "pg_isready -U user -d MyCash"]
       interval: 10s
       timeout: 5s
       retries: 5
