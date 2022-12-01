@@ -1,13 +1,12 @@
-// import { Router } from "express";
-// import createUserController from '../controllers/users/createUser.controller';
-// import loginUserController from '../controllers/users/loginUser.controller';
+import { Router } from "express";
+import { schemaValidation } from "../shared/middlewares";
+import { userSchema } from './validator/index';
+import UserController from "./UserController";
 
-// import userSchema from '../schemas/user.schema';
-// import schemaValidation from '../middlewares/schemaValidation.middleware';
+const usersRoute = Router();
+const controller = new UserController();
 
-// const usersRoute = Router();
+usersRoute.post("/register", schemaValidation(userSchema), controller.create);
+usersRoute.post("/login", schemaValidation(userSchema), controller.login);
 
-// usersRoute.post("/register", schemaValidation(userSchema), createUserController);
-// usersRoute.post("/login", schemaValidation(userSchema), loginUserController);
-
-// export default usersRoute;
+export default usersRoute;

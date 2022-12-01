@@ -10,4 +10,6 @@ const userSchema: any = yup.object().shape({
       )
 });
 
-export default userSchema;
+export {
+  userSchema
+}

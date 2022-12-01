@@ -3,7 +3,7 @@ import AccountService from './AccountService';
 
 class AccountController {
 
-    constructor(private service: AccountService) {}
+    private service: AccountService;
     
     public async retrieve(req: Request, res: Response, next: NextFunction): Promise<void> {
         const account = await this.service.retrieve(req.user.id)

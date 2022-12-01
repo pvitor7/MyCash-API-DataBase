@@ -3,6 +3,7 @@ import { AppError } from "../shared/AppError";
 import { Transaction } from "../../../entities/Transaction";
 import { User } from "../../../entities/User";
 import AppDataSource from "../../../db/data-source";
+import { IRequestTransaciton, ITransacitonFilterRequest } from "../shared/models/requests/transaction";
 
 class TransactionService {
 

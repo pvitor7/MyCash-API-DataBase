@@ -2,8 +2,10 @@ import AppDataSource from "../../../db/data-source";
 import { Account } from "../../../entities/Account";
 import { User } from "../../../entities/User";
 import { AppError } from "../shared/AppError";
-import { compare } from "bcryptjs"
+import { compare, hash } from "bcryptjs"
 import jwt from "jsonwebtoken";
+import { IUser } from "../shared/models/requests/user";
+import { IUserCreateResponse } from "../shared/models/responses/user";
 
 class UserService {
 
