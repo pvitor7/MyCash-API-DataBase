@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Accounts } from "./accounts"
+import { Account } from "./Account"
 import { Exclude } from "class-transformer"
 
 @Entity("Users")
@@ -16,11 +16,11 @@ export class User{
     @Exclude()
     password: string;
 
-    @OneToOne(() => Accounts, (account: Accounts) => Accounts, {
+    @OneToOne(() => Account, (account: Account) => Account, {
         eager: true
     })
     @JoinColumn()
-    account: Accounts;
+    account: Account;
 
     constructor(){
         if(!this.id){

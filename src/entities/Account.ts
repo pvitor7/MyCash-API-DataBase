@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, OneToMany } from "typeorm";
-import { User } from "./users";
-import { Transactions } from "./transactions";
+import { User } from "./User";
+import { Transactions } from "./Transaction";
 import { Exclude } from "class-transformer";
 
 @Entity("Accounts")
-export class Accounts{
+export class Account {
     @PrimaryGeneratedColumn()
     readonly id: string;
 

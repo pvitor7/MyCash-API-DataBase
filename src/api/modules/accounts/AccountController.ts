@@ -1,19 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
+import AccountService from './AccountService';
 
 class AccountController {
+
+    constructor(private service: AccountService) {}
     
     public async retrieve(req: Request, res: Response, next: NextFunction): Promise<void> {
-
-        // const { id } = req.user;
-    
-        const newAccount = { name: 'nova conta' }// await retriveAccountService(id);
-    
-        res.status(200).json(newAccount);
-
+        const account = await this.service.retrieve(req.user.id)
+        res.status(200).json(account);
         return next();
-    
-    };
-    
+    }
 }
 
 export default AccountController;

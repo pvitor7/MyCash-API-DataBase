@@ -1,4 +1,4 @@
-import { Accounts } from '../entities/accounts';
+import { Accounts } from '../entities/Account';
 
 export interface ITransaciton{
     debitedAccountId: string;

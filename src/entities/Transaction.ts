@@ -1,25 +1,25 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
-import { Accounts } from "./accounts"
+import { Account } from "./Account"
 
 @Entity("Transactions")
-export class Transactions{
+export class Transaction{
     @PrimaryGeneratedColumn()
     readonly id: string;
     
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     value: number;
 
-    @ManyToOne(() => Accounts, (account: Accounts) => account.transactions, {
+    @ManyToOne(() => Account, (account: Account) => account.transactions, {
         eager: true
     })
     @JoinColumn()
-    debitedAccountId: Accounts;
+    debitedAccountId: Account;
 
-    @ManyToOne(() => Accounts, (account: Accounts) => account.transactions, {
+    @ManyToOne(() => Account, (account: Account) => account.transactions, {
         eager: true
     })
     @JoinColumn()
-    creditedAccountId: Accounts;
+    creditedAccountId: Account;
 
     @CreateDateColumn()
     createdAt: Date;
