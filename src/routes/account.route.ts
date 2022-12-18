@@ -4,6 +4,6 @@ import retriveAccountController from '../controllers/accounts/retriveAccount.con
 
 const accountRoute = Router();
 
-accountRoute.get("", VerifyToken, retriveAccountController);
+accountRoute.get("/user", VerifyToken, retriveAccountController);
 
 export default accountRoute;

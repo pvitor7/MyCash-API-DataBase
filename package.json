@@ -7,20 +7,29 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "build": "tsc",
+    "test": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.3",
     "@types/jsonwebtoken": "^8.5.9",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "@types/yup": "^0.32.0",
+    "jest": "^29.3.1",
     "nodemon": "^2.0.20",
+    "sqlite3": "^5.1.2",
     "sucrase": "^3.28.0",
+    "supertest": "^6.3.1",
+    "ts-jest": "^29.0.3",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
