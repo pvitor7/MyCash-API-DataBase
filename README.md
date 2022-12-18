@@ -44,19 +44,14 @@ Utilize o CONTAINER ID da imagem "mycash-api-database_api" que aparecerá no ter
 
 Abra um terminal dentro do container com o comando:
 
-- docker exec -it 00000000000 /bin/bash
-
-Agora dentro do container execute os seguintes comandos para criar as tabelas (Comandos para o gerenciador YARN):
-
-- yarn typeorm migration:create src/migrations/initialMigration
-- yarn typeorm migration:generate src/migrations/initialMigration -d src/data-source.ts
-- yarn typeorm migration:run -d src/data-source.ts
+- docker exec api yarn typeorm migration:generate src/migrations/createTable -d src/data-source.ts
+- docker exec api yarn typeorm migration:run -d src/data-source.ts
 
 <br />
 
 A api também possui testes, que podem ser rodados com o comando:
 
-- yarn test
+- docker exec api yarn test
 
 
 <br />
