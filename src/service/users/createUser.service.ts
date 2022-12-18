@@ -14,7 +14,7 @@ const createUserService = async ({username, password}: IUser): Promise<IUserCrea
     const usernameAlreadyExists = users.find(user => user.username === username);
 
     if (usernameAlreadyExists){
-        throw new AppError("O usuário já existe")
+        throw new AppError("O usuário já existe");
     }
 
     const accountRepository = AppDataSource.getRepository(Accounts);

@@ -2,13 +2,13 @@ version: '3.9'
 
 services:
   api:
-    container_name: api_mycash
+    container_name: api
     build: .
     ports:
       - 3000:3000
     env_file:
       - .env
-      
+
     depends_on:
       db:
         condition: service_healthy
@@ -16,8 +16,8 @@ services:
       - .:/app
     
   db:
-    container_name: db_mycash
-    image: postgres:14
+    container_name: db
+    image: postgres:14-alpine
     ports: 
       - 5431:5432
     env_file:

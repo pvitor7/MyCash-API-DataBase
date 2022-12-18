@@ -9,13 +9,14 @@ import handleAppErrorMiddleware from './middlewares/handleAppErrors.middleware';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 
 app.use("/users", usersRoute);
 app.use("/accounts", accountRoute);
 app.use("/transactions", transactionRoute);
 
 app.use(handleAppErrorMiddleware);
-
 
 export default app;
 
