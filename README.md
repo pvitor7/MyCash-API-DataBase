@@ -35,14 +35,11 @@ Após as instalações, é necessário criar os containers, utilizando o seguint
 - docker-compose up
 
 O próximo passo é rodar as migrations, comandos que geram as tabelas necessárias no banco de dados.
-Essas migrations devem ser executadas dentro do container, e para acessálo siga alguns passos. 
+Essas migrations devem ser executadas dentro do container da api. 
 
-Abra outro terminal e execute este comando para ver os números de identificação dos containers.
-- docker ps -a
+<br />
 
-Utilize o CONTAINER ID da imagem "mycash-api-database_api" que aparecerá no terminal -> (SUPONHA que é 00000000000) <-
-
-Abra um terminal dentro do container com o comando:
+Em outro terminal rode os seguintes comandos:
 
 - docker exec api yarn typeorm migration:generate src/migrations/createTable -d src/data-source.ts
 - docker exec api yarn typeorm migration:run -d src/data-source.ts
