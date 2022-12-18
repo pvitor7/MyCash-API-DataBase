@@ -6,13 +6,9 @@ services:
     build: .
     ports:
       - 3000:3000
-    environment:
-      - DB_HOST=db_mycash
-      - DB_PASSWORD=1234
-      - DB=MyCash
-      - DB_USER=user
-      - SECRET_KEY=cash
-    
+    env_file:
+      - .env
+      
     depends_on:
       db:
         condition: service_healthy
@@ -24,13 +20,11 @@ services:
     image: postgres:14
     ports: 
       - 5431:5432
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=MyCash
+    env_file:
+      - .env
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d MyCash"]
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s
       timeout: 5s
       retries: 5
