@@ -24,8 +24,24 @@ const listTransactionsFilterService = async ({
   const transactionRepository = AppDataSource.getRepository(Transactions);
   const listTransactions = await transactionRepository.find();
 
+
+  const users = await userRepository.find();
+  const listTransferUser = listTransactions.map((transfer) => {
+    return {
+      id: transfer.id,
+      createdAt: transfer.createdAt,
+      debited: users.find(
+        (user: any) => user.account.id === transfer.debitedAccountId.id
+      )?.username,
+      credited: users.find(
+        (user: any) => user.account.id === transfer.creditedAccountId.id
+      )?.username,
+      value: transfer.value,
+    };
+  });
+
   if (day && month && age) {
-    return listTransactions.filter(
+    return listTransferUser.filter(
       (transaction) =>
         age == transaction.createdAt.getFullYear() &&
         month == transaction.createdAt.getMonth() + 1 &&
@@ -33,11 +49,32 @@ const listTransactionsFilterService = async ({
     );
   }
 
+  let listReturn: any = []; 
+
   if (type == "cash-out") {
-    return listTransactions.filter((transaction) => transaction.debitedAccountId.id === userAccount.account.id)
+    listTransactions.map((transaction) => {
+      if(transaction.debitedAccountId.id === userAccount.account.id){
+        return listReturn = [...listReturn, {id: transaction.id, createdAt: transaction.createdAt,
+          debited: users.find((user: any) => user.account.id === transaction.debitedAccountId.id)?.username,
+          credited: users.find((user: any) => user.account.id === transaction.creditedAccountId.id)?.username,
+          value: transaction.value}]    
+        }
+    })
+    return listReturn;
   }
 
-  if (type == "cash-in") {return listTransactions.filter((transaction) => transaction.creditedAccountId.id === userAccount.account.id)}
+  if (type == "cash-in") {
+    listTransactions.map((transaction) => {
+      if(transaction.creditedAccountId.id === userAccount.account.id){
+        return listReturn = [...listReturn,  { id: transaction.id, createdAt: transaction.createdAt,
+        debited: users.find((user: any) => user.account.id === transaction.debitedAccountId.id)?.username,
+        credited: users.find((user: any) => user.account.id === transaction.creditedAccountId.id)?.username,
+        value: transaction.value}]   
+    
+      }
+    })
+  return listReturn;
+}
     
 };
 
