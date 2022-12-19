@@ -1,9 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Accounts } from "./accounts"
+import { v4 as uuid } from "uuid";
+
 
 @Entity("Transactions")
 export class Transactions{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     readonly id: string;
     
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
@@ -23,4 +25,10 @@ export class Transactions{
 
     @CreateDateColumn()
     createdAt: Date;
+
+    constructor(){
+        if(!this.id){
+            this.id = uuid();
+        }
+    }
 }
