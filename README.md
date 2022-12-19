@@ -14,10 +14,15 @@ O projeto faz a criação do banco de dados com as tabelas necessárias. E a cri
 </h3>
 
 <p align="center" >
-  As tecnologias utilizadas no projeto foram: Typescript | PostgreSQL | Express | Typeorm | Repository Pattern | Class Transformer | Error Global | Docker.
+  As tecnologias utilizadas no projeto foram: Typescript | PostgreSQL | Express | Typeorm | Class Transformer | Error Global | Docker.
 </p>
 
 A API possui 7 Eendpoints, sendo os principais de criação de usuário, transferência e leitura de seus históricos.
+
+
+Diagrama de relacionamentos:
+
+<img src="public/img/Retations.png">
 
 <br />
 <br />
@@ -28,7 +33,7 @@ A API possui 7 Eendpoints, sendo os principais de criação de usuário, transfe
 
 Para a instalação das dependencias do projeto, o usuário deve acessar a pasta raiz, e no terminal utilizar o comando de execução dos gerenciador de dependências utilizado. 
 
-YARN: - yarn install <br/>
+- yarn install <br/>
 
 Após as instalações, é necessário criar os containers, utilizando o seguinte comando:
 
@@ -48,13 +53,12 @@ Em outro terminal rode os seguintes comandos:
 
 A api também possui testes, que podem ser rodados com o comando:
 
-- docker exec api yarn test
+- yarn test
 
 
 <br />
-<br />
 
-## **Endpoints**
+### **Endpoints**
 
 ## Rotas do Usuário
 
@@ -67,12 +71,12 @@ A api também possui testes, que podem ser rodados com o comando:
 `POST /users/register`
 
 ```json
+
 {
-  {
-  "username": "User 1",
+	"username": "User 1",
 	"password": "Pass0123"
-  }
 }
+
 ```
 
 <h2 align ='center'> Resposta de sucesso </h2>
@@ -84,7 +88,7 @@ A api também possui testes, que podem ser rodados com o comando:
 	"id": "1a9f73d7-ebbb-4416-9637-2730c386ebb9",
 	"username": "User 1",
 	"account": {
-		"id": 1
+		"id": "a021056c-de01-4707-9887-80ced1b585c1"
 	}
 }
 ```
@@ -130,7 +134,7 @@ Para o envio de uma transferência deve ser informado um nome de usuário e o va
 
 ```json
 {
-	"transferId": 3,
+	"transferId": "82747c12-2d92-43cc-86eb-cb0205bfa1f6",
 	"createdAt": "Tue Nov 22 2022 11:32:43 GMT+0000 (Coordinated Universal Time)",
 	"value": "1.00",
 	"debitedUser": "User 1",
@@ -157,26 +161,18 @@ Listar todas as transferências.
 ```json
 [
 	{
-		"id": 1,
-		"value": "1.00",
-		"createdAt": "2022-11-20T21:50:04.553Z",
-		"debitedAccountId": {
-			"id": 1
-		},
-		"creditedAccountId": {
-			"id": 2
-		}
+		"id": "8fc16b2a-bd04-4109-a5d5-ed840683ecd3",
+		"createdAt": "2022-12-19T13:01:59.090Z",
+		"debited": "User 1",
+		"credited": "Destinatário",
+		"value": "50.00"
 	},
 	{
-		"id": 2,
-		"value": "1.00",
-		"createdAt": "2022-11-20T21:50:23.502Z",
-		"debitedAccountId": {
-			"id": 2
-		},
-		"creditedAccountId": {
-			"id": 1
-		}
+		"id": "a62979a6-9103-4685-b8ec-de5eb2513dc5",
+		"createdAt": "2022-12-19T13:02:11.384Z",
+		"debited": "Destinatário",
+		"credited": "User 1",
+		"value": "26.00"
 	}
 ]
 ```
@@ -189,26 +185,18 @@ Também é possível istar transferências por enviadas (cash-out) e recebidas (
 ```json
 [
 	{
-		"id": 1,
-		"value": "1.00",
-		"createdAt": "2022-11-20T21:50:04.553Z",
-		"debitedAccountId": {
-			"id": 1
-		},
-		"creditedAccountId": {
-			"id": 2
-		}
+		"id": "8fc16b2a-bd04-4109-a5d5-ed840683ecd3",
+		"createdAt": "2022-12-19T13:01:59.090Z",
+		"debited": "User 1",
+		"credited": "Destinatário",
+		"value": "10.00"
 	},
 	{
-		"id": 2,
-		"value": "1.00",
-		"createdAt": "2022-11-20T21:50:23.502Z",
-		"debitedAccountId": {
-			"id": 2
-		},
-		"creditedAccountId": {
-			"id": 1
-		}
+		"id": "a62979a6-9103-4685-b8ec-de5eb2513dc5",
+		"createdAt": "2022-12-19T13:02:11.384Z",
+		"debited": "User 1",
+		"credited": "Destinatário",
+		"value": "6.00"
 	}
 ]
 ```
@@ -230,27 +218,19 @@ Também é possível existe o filtro de transferências por data. Que pode ser f
 ```json
 [
 	{
-		"id": 3,
-		"value": "1.00",
-		"createdAt": "2022-11-22T11:32:43.368Z",
-		"debitedAccountId": {
-			"id": 3
-		},
-		"creditedAccountId": {
-			"id": 4
-		}
+		"id": "8fc16b2a-bd04-4109-a5d5-ed840683ecd3",
+		"createdAt": "2022-11-22T13:01:59.090Z",
+		"debited": "User 1",
+		"credited": "Destinatário",
+		"value": "15.00"
 	},
 	{
-		"id": 4,
-		"value": "20.00",
-		"createdAt": "2022-11-22T12:08:51.649Z",
-		"debitedAccountId": {
-			"id": 3
-		},
-		"creditedAccountId": {
-			"id": 4
-		}
-	}
+		"id": "a62979a6-9103-4685-b8ec-de5eb2513dc5",
+		"createdAt": "2022-11-22T13:02:11.384Z",
+		"debited": "User 1",
+		"credited": "Destinatário",
+		"value": "27.00"
+}
 ]
 ```
 
