@@ -33,7 +33,7 @@ const createUserService = async ({username, password}: IUser): Promise<IUserCrea
     userRepository.create(user);
     await userRepository.save(user);
 
-    return user;
+    return {id: user.id, user: user.username, balance: account.balance};
 
 };
 
