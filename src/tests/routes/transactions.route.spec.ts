@@ -27,12 +27,12 @@ describe("Teste de rota de Transações", () => {
       });
 
       test("Testando o acesso a conta do usuário", async () => {
-        const response = await request(app).get("/account/user").set("Authorization", `Bearer ${token}`);
+        const response = await request(app).get("/accounts/user").set("Authorization", `Bearer ${token}`);
         expect(response.body).toHaveProperty('balance');
       })
     
       test("Testando o saldo inicial da conta do usuário", async () => {
-        const response = await request(app).get("/account/user").set("Authorization", `Bearer ${token}`);
+        const response = await request(app).get("/accounts/user").set("Authorization", `Bearer ${token}`);
         expect(response.body.balance).toBe(100);
       })
     

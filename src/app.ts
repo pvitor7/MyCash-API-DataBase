@@ -13,7 +13,7 @@ app.use(cors());
 
 
 app.use("/users", usersRoute);
-app.use("/account", accountRoute);
+app.use("/accounts", accountRoute);
 app.use("/transactions", transactionRoute);
 
 app.use(handleAppErrorMiddleware);
