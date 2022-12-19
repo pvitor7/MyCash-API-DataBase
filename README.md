@@ -87,9 +87,7 @@ A api também possui testes, que podem ser rodados com o comando:
 {
 	"id": "1a9f73d7-ebbb-4416-9637-2730c386ebb9",
 	"username": "User 1",
-	"account": {
-		"id": "a021056c-de01-4707-9887-80ced1b585c1"
-	}
+	"balance": "100.00"
 }
 ```
 

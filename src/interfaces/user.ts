@@ -10,9 +10,8 @@ interface IUserCreateAccountResponse{
 
 
 export interface IUserCreateResponse{
-    
     id: string,
-    username: string,
-    account: IUserCreateAccountResponse
+    user: string,
+    balance: number
     
 }

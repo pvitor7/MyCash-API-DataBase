@@ -38,9 +38,10 @@ describe("Teste de rota de Clients", () => {
 
     test("Testando a criação de um usuário", async () => {
         const newUser = await request(app).post("/users/register").send({username: "User 1", password: "Pass1234"});
+        console.log(newUser.body);
         expect(newUser.body).toHaveProperty('id');
-        expect(newUser.body).toHaveProperty('account');
-        expect(newUser.body.username).toBe('User 1');
+        expect(newUser.body.user).toBe('User 1');
+        expect(newUser.body.balance).toBe(100);
     })
 
 
