@@ -31,7 +31,9 @@ Diagrama de relacionamentos:
   Instruções para instalação da aplicação&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </h3>
 
-Para a instalação das dependencias do projeto, o usuário deve acessar a pasta raiz, e no terminal utilizar o comando de execução dos gerenciador de dependências utilizado. 
+Primeiro crie um arquivo **".env"** seguindo o modelo do arquivo **".env.example"** para gerar as variáveis de ambiente necessárias.
+
+Para a instalação das dependencias do projeto, o usuário deve acessar a pasta raiz, e no terminal utilizar o comando de execução dos gerenciador de dependências utilizado.
 
 - yarn install <br/>
 
