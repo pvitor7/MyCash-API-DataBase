@@ -102,7 +102,7 @@ Caso você acabe errando e mandando algum campo inválido, como a senha no exemp
 
 ```json
 {
-  "message": "A senha deve ter pelo menos uma letra minúscula, uma letra maiúscula, um    número e 8 caracteres!"
+  "message": "A senha deve ter pelo menos uma letra minúscula, uma letra maiúscula, um número e 8 caracteres!"
 }
 ```
 
@@ -209,7 +209,7 @@ Também é possível existe o filtro de transferências por data. Que pode ser f
 {
 	"day": 22,
 	"month": 11,
-	"age": 2022
+	"year": 2022
 }
 ```
 
