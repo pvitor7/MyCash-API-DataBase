@@ -7,9 +7,9 @@ const listTransactionsFilterController = async (req: Request, res: Response) => 
     
     const userId = req.user.id;
     const { type } = req.params;
-    const { day, month, age } = req.body;
+    const { day, month, year } = req.body;
 
-    const listTransactions = await listTransactionsFilterService({userId, day, month, age, type});
+    const listTransactions = await listTransactionsFilterService({userId, day, month, year, type});
 
     return res.status(200).json(instanceToPlain(listTransactions));
 };
