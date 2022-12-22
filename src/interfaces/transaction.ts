@@ -1,5 +1,3 @@
-import { Accounts } from '../entities/accounts';
-
 export interface ITransaciton{
     debitedAccountId: string;
     creditedAccountId: string;
@@ -25,5 +23,5 @@ export interface ITransacitonFilterRequest{
     type?: string;
     day?: number;
     month?: number;
-    age?: number;
+    year?: number;
 }

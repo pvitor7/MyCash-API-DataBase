@@ -10,8 +10,8 @@ const transactionSchema: any = yup.object().shape({
 const transactionFilterSchema: any = yup.object().shape({ 
     day: yup.number().min(1, "Dia inválido!").max(31, "Dia inválido!").required("É necessário informar o dia da transferência!"),
     month: yup.number().min(1, "Mês inválido!").max(12, "Mês inválido!").required("É necessário informar o mês da transferência!"),
-    age: yup.number().min(2020, "Só existem registros a partir do ano 2020.").required("É necessário informar o ano da transferência!")
-    .test("len", "O ano não pode ser maior do que o atual!", (val: any) => {
+    year: yup.number().min(2020, "Só existem registros a partir do ano 2020.").required("É necessário informar o ano da transferência!")
+    .test("len", "A data informada não pode ser maior do que a atual!", (val: any) => {
         const dataAtual = new Date();
         const anoAtual = dataAtual. getFullYear();
         return val <= anoAtual;

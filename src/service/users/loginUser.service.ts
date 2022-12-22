@@ -4,13 +4,11 @@ import { compare } from "bcryptjs"
 import jwt from "jsonwebtoken";
 import AppDataSource from '../../data-source';
 import { User } from '../../entities/users';
+import UserRepository from '../../repositories/users.repository';
 
 const LoginUserService = async ({username, password}: IUser): Promise<string> => {
 
-    const userRepository = AppDataSource.getRepository(User);
-    const users = await userRepository.find();
-
-    const usernameExists = users.find(user => user.username === username);
+    const usernameExists = await UserRepository.findOneByName(username);
 
     if (!usernameExists){
         throw new AppError("Usuário ou senha incorretos.", 400);
@@ -29,7 +27,6 @@ const LoginUserService = async ({username, password}: IUser): Promise<string> =>
     })
 
     return token;
-
 }
 
 export default LoginUserService;
