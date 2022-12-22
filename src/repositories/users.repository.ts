@@ -27,8 +27,6 @@ class UserRepository {
   static findOneByAccount(account: Accounts):Promise<User | null>{
     return this.UsersRepo.findOneBy({account: account});
   }
-
-
 }
 
 export default UserRepository;

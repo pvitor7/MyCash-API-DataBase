@@ -61,12 +61,12 @@ describe("Teste de rota de Transações", () => {
       .post("/transactions")
       .set("Authorization", `Bearer ${token}`)
       .send({ usernameAddressee: "User 2", value: 1000 });
-    expect(response.body).toHaveProperty("transferId");
+    expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("createdAt");
     expect(response.body).toHaveProperty("value");
-    expect(response.body).toHaveProperty("debitedUser");
-    expect(response.body).toHaveProperty("creditedUser");
-    expect(response.body.creditedUser).toBe("User 2");
+    expect(response.body).toHaveProperty("debited");
+    expect(response.body).toHaveProperty("credited");
+    expect(response.body.credited).toBe("User 2");
     expect(response.body.value).toBe(10);
   });
 
