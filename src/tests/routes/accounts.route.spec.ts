@@ -89,7 +89,6 @@ describe("Teste de rota de Transações", () => {
     expect(response.body[0]).toHaveProperty("id");
     expect(response.body[0]).toHaveProperty("createdAt");
     expect(response.body[0]).toHaveProperty("value");
-    expect(response.body[0]).toHaveProperty("debited");
     expect(response.body[0]).toHaveProperty("credited");
     expect(response.body[0].value).toBe(10);
   });
@@ -104,7 +103,6 @@ describe("Teste de rota de Transações", () => {
     expect(response.body[0]).toHaveProperty("createdAt");
     expect(response.body[0]).toHaveProperty("value");
     expect(response.body[0]).toHaveProperty("debited");
-    expect(response.body[0]).toHaveProperty("credited");
     expect(response.body[0].value).toBe(20);
   });
 });

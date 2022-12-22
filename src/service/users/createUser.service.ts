@@ -2,26 +2,22 @@ import { IUserCreateResponse } from './../../interfaces/user';
 import { AppError } from './../../errors/AppError';
 import { IUser } from '../../interfaces/user';
 import { User } from '../../entities/users';
-import AppDataSource from '../../data-source';
 import { hash } from 'bcryptjs';
 import { Accounts } from '../../entities/accounts';
+import UserRepository from '../../repositories/users.repository';
+import AccountRepository from '../../repositories/accounts.repository';
 
 const createUserService = async ({username, password}: IUser): Promise<IUserCreateResponse> => {
     
-    const userRepository = AppDataSource.getRepository(User);
-    const users = await userRepository.find();
+    const usernameAlreadyExists: User|null = await UserRepository.findOneByName(username);
 
-    const usernameAlreadyExists = users.find(user => user.username === username);
-
-    if (usernameAlreadyExists){
+    if(usernameAlreadyExists){
         throw new AppError("O usuário já existe");
     }
 
-    const accountRepository = AppDataSource.getRepository(Accounts);
     const account = new Accounts();
     account.balance = 100;
-    accountRepository.create(account);
-    await accountRepository.save(account);
+    await AccountRepository.create(account);
 
     const hashedPassword = await hash(password, 12);
     
@@ -30,11 +26,9 @@ const createUserService = async ({username, password}: IUser): Promise<IUserCrea
     user.password = hashedPassword;
     user.account = account;
 
-    userRepository.create(user);
-    await userRepository.save(user);
+    const newUser = await UserRepository.create(user);
 
-    return {id: user.id, user: user.username, balance: account.balance};
-
+    return {id: newUser.id, user: newUser.username, balance: newUser.account.balance};
 };
 
 export default createUserService;
