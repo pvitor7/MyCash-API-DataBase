@@ -4,10 +4,14 @@ import loginUserController from '../controllers/users/loginUser.controller';
 
 import userSchema from '../schemas/user.schema';
 import schemaValidation from '../middlewares/schemaValidation.middleware';
+import retriveUserController from "../controllers/users/retriveUser.controller";
+import { VerifyToken } from "../middlewares/VerifyToken.middleware";
 
 const usersRoute = Router();
 
 usersRoute.post("/register", schemaValidation(userSchema), createUserController);
+usersRoute.get("/:id", VerifyToken, retriveUserController);
+
 usersRoute.post("/login", schemaValidation(userSchema), loginUserController);
 
 export default usersRoute;

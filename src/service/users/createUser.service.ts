@@ -8,7 +8,6 @@ import UserRepository from '../../repositories/users.repository';
 import AccountRepository from '../../repositories/accounts.repository';
 
 const createUserService = async ({username, password}: IUser): Promise<IUserCreateResponse> => {
-    
     const usernameAlreadyExists: User|null = await UserRepository.findOneByName(username);
 
     if(usernameAlreadyExists){
