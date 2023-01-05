@@ -21,7 +21,7 @@ const createTransactionService = async ({userId, usernameAddressee, value}: IReq
     
     const accountDebitExists = await AccountRepository.findById(user.account.id);
     if(!accountDebitExists){ throw new AppError("A conta para débito não foi encontrada.", 404) }
-    if(accountDebitExists.balance <= valueTransaciton) { throw new AppError("Saldo insuficiente para transferência.", 406) }
+    if(accountDebitExists.balance < valueTransaciton) { throw new AppError("Saldo insuficiente para transferência.", 406) }
     
     const accountCreditExists = await AccountRepository.findById(addressee.account.id);
     if(!accountCreditExists){throw new AppError("A conta para destino não foi encontrada.", 404)}
