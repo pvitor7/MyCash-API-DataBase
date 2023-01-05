@@ -1,15 +1,13 @@
-import { IResponseTransaction } from "./../../interfaces/transaction";
+import { ITransaciton } from "./../../interfaces/transaction";
 import { AppError } from "./../../errors/AppError";
 import AppDataSource from "../../data-source";
 import { Transactions } from "../../entities/transactions";
 import { User } from "../../entities/users";
-import { Accounts } from "../../entities/accounts";
+import UserRepository from "../../repositories/users.repository"
 
-const listTransactionsService = async (userId: string) => {
-  const userRepository = AppDataSource.getRepository(User);
-  const userAccount = await userRepository.findOne({
-    where: { id: userId },
-  });
+const listTransactionsService = async (userId: string): Promise<ITransaciton[]> => {
+
+  const userAccount: User|null = await UserRepository.findOneById(userId);
 
   if (!userAccount) {
     throw new AppError("Usuário não encontrado!", 404);
@@ -24,12 +22,16 @@ const listTransactionsService = async (userId: string) => {
     throw new AppError("Esta conta ainda não envio nem recebeu transfências.", 404);
   }
 
-  const users = await userRepository.find();
+  const users: User[] = await UserRepository.allUsers();
   const listTransferUser = listTransactions.map((transfer) => {
-    return { id: transfer.id, createdAt: transfer.createdAt,
-      debited: users.find((user: any) => user.account.id === transfer.debitedAccountId.id)?.username,
-      credited: users.find((user: any) => user.account.id === transfer.creditedAccountId.id)?.username,
-      value: transfer.value};
+
+    return { 
+      id: transfer.id, 
+      createdAt: transfer.createdAt,
+      debited: users.find((user: User) => user.account.id === transfer.debitedAccountId.id)?.username || "",
+      credited: users.find((user: User) => user.account.id === transfer.creditedAccountId.id)?.username || "",
+      value: transfer.value
+    };
   });
 
   return listTransferUser;

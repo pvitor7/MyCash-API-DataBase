@@ -19,7 +19,7 @@ describe("Teste de rota de Transações", () => {
 
     const userTest1 = { username: "User 1", password: "Pass1234" };
     await request(app).post("/users/register").send(userTest1);
-    loginResp = await request(app).post(`/users/login`).send(userTest1);
+    loginResp = await request(app).post(`/login`).send(userTest1);
     token = loginResp.body.token;
 
     const userTest2 = { username: "User 2", password: "Pass1234" };
@@ -61,12 +61,12 @@ describe("Teste de rota de Transações", () => {
       .post("/transactions")
       .set("Authorization", `Bearer ${token}`)
       .send({ usernameAddressee: "User 2", value: 1000 });
-    expect(response.body).toHaveProperty("transferId");
+    expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("createdAt");
     expect(response.body).toHaveProperty("value");
-    expect(response.body).toHaveProperty("debitedUser");
-    expect(response.body).toHaveProperty("creditedUser");
-    expect(response.body.creditedUser).toBe("User 2");
+    expect(response.body).toHaveProperty("debited");
+    expect(response.body).toHaveProperty("credited");
+    expect(response.body.credited).toBe("User 2");
     expect(response.body.value).toBe(10);
   });
 
@@ -95,7 +95,7 @@ describe("Teste de rota de Transações", () => {
 
   test("Testando rota de listagem de transferências recebidas", async () => {
 
-    const loginUser2Resp = await request(app).post(`/users/login`).send({ username: "User 2", password: "Pass1234" });
+    const loginUser2Resp = await request(app).post(`/login`).send({ username: "User 2", password: "Pass1234" });
     const tokenUser2 = loginUser2Resp.body.token;
     await request(app).post("/transactions").set("Authorization", `Bearer ${tokenUser2}`).send({ usernameAddressee: "User 1", value: 2000 });
     const response = await request(app).get("/transactions/category/cash-in").set("Authorization", `Bearer ${token}`);

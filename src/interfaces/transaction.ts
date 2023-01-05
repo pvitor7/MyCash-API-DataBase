@@ -1,7 +1,12 @@
+import { Accounts } from "../entities/accounts";
+import { User } from "../entities/users";
+
 export interface ITransaciton{
-    debitedAccountId: string;
-    creditedAccountId: string;
+    id: string;
+    createdAt: Date;
     value: number;
+    debited: string;
+    credited: string;
 }
 
 export interface IRequestTransaciton{
@@ -10,18 +15,18 @@ export interface IRequestTransaciton{
     value: number;
 }
 
-export interface IResponseTransaction{
-    transferId: number;
-    createdAt: string;
-    value: string;
-    debitedUser: string;
-    creditedUser: string;
-}
-
 export interface ITransacitonFilterRequest{
     userId: string;
     type?: string;
     day?: number;
     month?: number;
     year?: number;
+}
+
+export interface ITransactionObject{
+    id: string,
+    createdAt: Date,
+    credited: User,
+    debited: User,
+    value: number,
 }
