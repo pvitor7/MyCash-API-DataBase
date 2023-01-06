@@ -84,7 +84,7 @@ describe("Teste de rota de Transações", () => {
 
   test("Testando rota de listagem de todas as transferências enviadas", async () => {
     const response = await request(app)
-      .get("/transactions/category/cash-out")
+      .get("/transactions/cash-out")
       .set("Authorization", `Bearer ${token}`);
     expect(response.body[0]).toHaveProperty("id");
     expect(response.body[0]).toHaveProperty("createdAt");
@@ -98,7 +98,7 @@ describe("Teste de rota de Transações", () => {
     const loginUser2Resp = await request(app).post(`/login`).send({ username: "User 2", password: "Pass1234" });
     const tokenUser2 = loginUser2Resp.body.token;
     await request(app).post("/transactions").set("Authorization", `Bearer ${tokenUser2}`).send({ usernameAddressee: "User 1", value: 2000 });
-    const response = await request(app).get("/transactions/category/cash-in").set("Authorization", `Bearer ${token}`);
+    const response = await request(app).get("/transactions/cash-in").set("Authorization", `Bearer ${token}`);
     expect(response.body[0]).toHaveProperty("id");
     expect(response.body[0]).toHaveProperty("createdAt");
     expect(response.body[0]).toHaveProperty("value");
