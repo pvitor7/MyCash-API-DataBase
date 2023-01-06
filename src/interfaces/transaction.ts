@@ -18,9 +18,9 @@ export interface IRequestTransaciton{
 export interface ITransacitonFilterRequest{
     userId: string;
     type?: string;
-    day?: number;
-    month?: number;
-    year?: number;
+    day?: string;
+    month?: string;
+    year?: string;
 }
 
 export interface ITransactionObject{

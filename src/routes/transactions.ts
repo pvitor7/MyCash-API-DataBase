@@ -10,7 +10,8 @@ const transactionRoute = Router();
 
 transactionRoute.post("", VerifyToken, schemaValidation(transactionSchema), createTransactionController);
 transactionRoute.get("/", VerifyToken, listTransactionsController);
-transactionRoute.post("/category", VerifyToken,  schemaValidation(transactionFilterSchema), listTransactionsFilterController);
-transactionRoute.get("/category/:type", VerifyToken, listTransactionsFilterController);
+// transactionRoute.post("/category", VerifyToken,  schemaValidation(transactionFilterSchema), listTransactionsFilterController);
+transactionRoute.get("/:type", VerifyToken, listTransactionsFilterController);
+transactionRoute.get("/:year/:month/:day", VerifyToken, listTransactionsFilterController);
 
 export default transactionRoute;

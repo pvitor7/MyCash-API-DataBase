@@ -149,7 +149,6 @@ Caso você não seja o o proprietário:
   "message": "Usuário não autorizado!"
 }
 ```
-///////////////////////////
 
 <h2 align ='center'> Deletando um Usuário </h2>
 
@@ -260,7 +259,7 @@ Listar todas as transferências.
 
 Também é possível istar transferências por enviadas (cash-out) e recebidas (cash-in).
 
-`GET - category/cash-in` ou `category/cash-out  - FORMATO DA RESPOSTA - STATUS 200` 
+`GET - /cash-in` ou `/cash-out  - FORMATO DA RESPOSTA - STATUS 200` 
  
 
 ```json
@@ -284,15 +283,7 @@ Também é possível istar transferências por enviadas (cash-out) e recebidas (
 
 Também é possível existe o filtro de transferências por data. Que pode ser feito com o modelo abaixo.
 
-`POST /transactions/category`
-
-```json
-{
-	"day": 22,
-	"month": 11,
-	"year": 2022
-}
-```
+`GET /transactions/:year/:month/:day`
 
 `FORMATO DA RESPOSTA - STATUS 200`
 
@@ -315,13 +306,13 @@ Também é possível existe o filtro de transferências por data. Que pode ser f
 ]
 ```
 
-Caso seja informado um ano maior do que o atual, a resposta será assim.
+Caso a data seja maior do que o atual, a resposta será assim.
 
 `FORMATO DA RESPOSTA - STATUS 406`
 
 ```json
 {
-  "message": "O ano não pode ser maior do que o atual!"
+  "message": "A data informada não pode ser maior do que a atual!"
 }
 ```
 

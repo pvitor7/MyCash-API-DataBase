@@ -1,10 +1,11 @@
 import { AppError } from "./../../errors/AppError";
-import { ITransaciton, ITransacitonFilterRequest, ITransactionObject } from "./../../interfaces/transaction";
+import { ITransaciton, ITransacitonFilterRequest } from "./../../interfaces/transaction";
 import AppDataSource from "../../data-source";
 import { User } from "../../entities/users";
 import TransactionsRepository from "../../repositories/transactions.repository";
 
 const listTransactionsFilterService = async ({userId, day, month, year, type}: ITransacitonFilterRequest): Promise<ITransaciton[] | undefined> => {
+
 
   const userRepository = AppDataSource.getRepository(User);
   const userAccount = await userRepository.findOne({ where: { id: userId } });
@@ -31,7 +32,7 @@ const listTransactionsFilterService = async ({userId, day, month, year, type}: I
   let listReturn: ITransaciton[] = [];
 
   if (day && month && year) {
-    if (new Date() < new Date(year, month - 1, day)) {
+    if (new Date() < new Date(Number(year), Number(month) - 1, Number(day))){
       throw new AppError(
         "A data informada não pode ser maior do que a atual!",
         400
@@ -40,9 +41,9 @@ const listTransactionsFilterService = async ({userId, day, month, year, type}: I
 
     listTransferUser.forEach((transaction) => {
       if (
-        year == transaction.createdAt.getFullYear() &&
-        month == transaction.createdAt.getMonth() + 1 &&
-        day == transaction.createdAt.getDate()
+        Number(year) == transaction.createdAt.getFullYear() &&
+        Number(month) == transaction.createdAt.getMonth() + 1 &&
+        Number(day) == transaction.createdAt.getDate()
       ) {
         return (listReturn = [
           ...listReturn,

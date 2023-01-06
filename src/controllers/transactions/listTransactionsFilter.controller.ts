@@ -6,8 +6,7 @@ import { instanceToPlain } from "class-transformer";
 const listTransactionsFilterController = async (req: Request, res: Response) => {
     
     const userId = req.user.id;
-    const { type } = req.params;
-    const { day, month, year } = req.body;
+    const { day, month, year, type } = req.params;
 
     const listTransactions = await listTransactionsFilterService({userId, day, month, year, type});
 
