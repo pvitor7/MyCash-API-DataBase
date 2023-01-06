@@ -116,6 +116,86 @@ Caso o usuário já exista.
 }
 ```
 
+
+<h2 align ='center'> Buscando um Usuário </h2>
+
+`GET /users/:id`
+
+<h2 align ='center'> Resposta de sucesso </h2>
+
+Caso o token do usuário seja o do titular da conta, a resposta incluirá a identificação de sua conta.
+
+`FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+{
+	"id": "1a9f73d7-ebbb-4416-9637-2730c386ebb9",
+	"username": "User 1",
+	"account": {
+		"id": "ec057a58-ba8a-41b4-b6d9-ea061e3eaba0"
+	}
+}
+```
+
+
+<h2 align ='center'> Possíveis erros </h2>
+
+Caso você não seja o o proprietário:
+
+` FORMATO DA RESPOSTA - STATUS 403`
+
+```json
+{
+  "message": "Usuário não autorizado!"
+}
+```
+
+<h2 align ='center'> Deletando um Usuário </h2>
+
+`DELETE /users/:id`
+
+<h2 align ='center'> Resposta de sucesso </h2>
+
+Caso o token do usuário seja o do titular da conta.
+
+`FORMATO DA RESPOSTA - STATUS 204`
+
+
+<h2 align ='center'> Possíveis erros </h2>
+
+Caso você não seja o o proprietário:
+
+` FORMATO DA RESPOSTA - STATUS 403`
+
+```json
+{
+  "message": "Usuário não autorizado!"
+}
+```
+
+Caso não haja token:
+
+` FORMATO DA RESPOSTA - STATUS 401`
+
+```json
+{
+  "message": "Invalid token"
+}
+```
+
+
+Caso o usuário ainda possua saldo em sua conta:
+
+` FORMATO DA RESPOSTA - STATUS 403`
+
+```json
+{
+  	"message": "O usuário ainda possui saldo em sua conta."
+}
+```
+
+
+
 <h2 align ='center'> Realizando uma transferência </h2>
 Para o envio de uma transferência deve ser informado um nome de usuário e o valor a ser transferido. O valor deve ser no mínimo de 3 números, incluindo os centavos.
 
@@ -179,7 +259,7 @@ Listar todas as transferências.
 
 Também é possível istar transferências por enviadas (cash-out) e recebidas (cash-in).
 
-`GET - category/cash-in` ou `category/cash-out  - FORMATO DA RESPOSTA - STATUS 200` 
+`GET - /cash-in` ou `/cash-out  - FORMATO DA RESPOSTA - STATUS 200` 
  
 
 ```json
@@ -203,15 +283,7 @@ Também é possível istar transferências por enviadas (cash-out) e recebidas (
 
 Também é possível existe o filtro de transferências por data. Que pode ser feito com o modelo abaixo.
 
-`POST /transactions/category`
-
-```json
-{
-	"day": 22,
-	"month": 11,
-	"year": 2022
-}
-```
+`GET /transactions/:year/:month/:day`
 
 `FORMATO DA RESPOSTA - STATUS 200`
 
@@ -234,13 +306,13 @@ Também é possível existe o filtro de transferências por data. Que pode ser f
 ]
 ```
 
-Caso seja informado um ano maior do que o atual, a resposta será assim.
+Caso a data seja maior do que o atual, a resposta será assim.
 
 `FORMATO DA RESPOSTA - STATUS 406`
 
 ```json
 {
-  "message": "O ano não pode ser maior do que o atual!"
+  "message": "A data informada não pode ser maior do que a atual!"
 }
 ```
 

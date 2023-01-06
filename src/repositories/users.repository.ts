@@ -28,7 +28,13 @@ class UserRepository {
     return this.UsersRepo.findOneBy({account: account});
   }
 
+  static async delete(id: string){
+    return await this.UsersRepo.delete(id);
+  }
 
+  static async update(id: string, password: string){
+      return await this.UsersRepo.update(id, {password: password})
+  }
 }
 
 export default UserRepository;

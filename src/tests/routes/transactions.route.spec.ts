@@ -18,7 +18,7 @@ describe("Teste de rota de Transações", () => {
           });
         const userTest = {username: "User 1", password: "Pass1234"};
         await request(app).post("/users/register").send(userTest);
-        loginResp = await request(app).post(`/users/login`).send(userTest);
+        loginResp = await request(app).post(`/login`).send(userTest);
         token = loginResp.body.token;
       });
             

@@ -3,7 +3,7 @@ import { Accounts } from '../../entities/accounts';
 import { User } from '../../entities/users';
 import AppDataSource from '../../data-source';
 
-const retriveAccountService = async (userId: string) => {
+const retriveAccountService = async (userId: string): Promise<Accounts> => {
 
     const userRepository = AppDataSource.getRepository(User);
     const user = await userRepository.findOne({where: {
@@ -16,6 +16,10 @@ const retriveAccountService = async (userId: string) => {
     
     const accountRepository = AppDataSource.getRepository(Accounts);
     const account = await accountRepository.findOne({where: {id: user.account.id}});
+
+    if(!account){ 
+        throw new AppError("O usuário não possui contas cadastradas!", 404)
+    }
 
     return account;
 } 
